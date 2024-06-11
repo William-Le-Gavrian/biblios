@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livre{% endblock %}
+
+{% block body %}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            {% if book is not null %}
+            <div class="col-md-6">
+                <img class="card-img-top mb-5 mb-md-0" src="{{ book.cover }}" alt="Couverture de {{ book.title }}" />
+            </div>
+            <div class="col-md-6">
+                <div class="small mb-1"> {{ book.isbn }} </div>
+                <h1 class="display-5 fw-bolder"> {{ book.title }} </h1>
+                <div class="fs-5">
+                    <span>
+                        Auteur(s) : {{ book.authors|map(a => a.name)|join(', ') }}
+                    </span>
+                </div>
+                <div class="fs-5">
+                    <span>
+                        Editeur : {{ book.editor.name }}
+                    </span>
+                </div>
+                <div class="fs-5">
+                    <span>
+                        {{book.pageNumber}}{{ book.pageNumber is not null ? " pages"}}
+                    </span>
+                    <span>
+                        - {{ book.editedAt|date('d M Y') }}
+                    </span>
+                </div>
+                <div class="fs-5 mb-5">
+                    <span>
+                        Statut : {{ book.status.getLabel() }}
+                    </span>
+                </div>
+                <p class="lead"> {{ book.plot }} <p>
+                <div class="d-flex">
+                    <a href="{{ path('app_book_index') }}">
+                        <button class="btn btn-primary" type="button">Retour</button>
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <div>Livre non trouvé</div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

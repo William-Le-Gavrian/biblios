@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editeur{% endblock %}
+
+{% block body %}
+<section class="container px-4">
+    <div class="w-50 m-auto">
+        <h1>Editeur : </h1>
+
+        {% if editor is not null %}
+        <div class="card mb-1 m-auto">
+            <div class="card-body">
+                <div class="card-title d-flex justify-content-between">
+                    <h4 class="mb-1">{{ editor.name }}</h4>
+                    <small class="text-muted">Identifiant : {{ editor.id }}</small>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div>Editeur non trouvé</div>
+        {% endif %}
+        <a href="{{ path('app_admin_editor_index') }}" class="btn btn-primary">Retour</a>
+        <a href="{{ path('app_admin_editor_edit', {id: editor.id}) }}" class="btn btn-primary">Editer</a>
+    </div>
+</section>
+{% endblock %}
